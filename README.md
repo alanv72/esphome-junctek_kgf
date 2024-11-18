@@ -33,6 +33,7 @@ uart:
 sensor:
   - platform: junctek_kgf    
     uart_id: uart0
+    address: 1
     invert_current: true
     voltage:
       name: "junctek1_battery_voltage"
