@@ -22,6 +22,9 @@ The ESP32 needs to be connected via an RS-485 module to the RS-485 on the monito
 The applicable config for the device should look something like:
 
 ```yaml
+external_components:
+  - source: github://alanv72/esphome-junctek_kgf
+
 uart: 
  ######### UART for the Juncteck (1) ######
   - id: uart0
