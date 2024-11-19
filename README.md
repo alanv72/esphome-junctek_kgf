@@ -27,7 +27,7 @@ external_components:
 
 uart: 
  ######### UART for the Juncteck (1) ######
-  - id: uart0
+  - id: kg_uart
     tx_pin: GPIO03
     rx_pin: GPIO01
     baud_rate: 115200
@@ -35,7 +35,7 @@ uart:
 
 sensor:
   - platform: junctek_kgf    
-    uart_id: uart0
+    uart_id: kg_uart
     address: 1
     invert_current: true
     voltage:
