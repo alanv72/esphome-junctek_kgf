@@ -144,7 +144,7 @@ void JuncTekKGF::handle_status(const char* buffer)
   const float runtimeSeconds = getval(cursor);
   const float temperature = getval(cursor) - 100.0;
   const float powerInWatts = getval(cursor);
-  const int functionPending = getval(cursor)
+  const int functionPending = getval(cursor);
   const int relayStatus = getval(cursor);
   const int direction = getval(cursor);
   const int batteryLifeMinutes = getval(cursor);
