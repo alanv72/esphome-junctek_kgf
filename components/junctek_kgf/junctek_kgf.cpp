@@ -163,7 +163,10 @@ void JuncTekKGF::handle_status(const char* buffer)
  if (battery_internal_resistor_sensor_)
     this->battery_internal_resistor_sensor_->publish_state(batteryInternalOhms); 
  if (battery_life_sensor_)
-    this->battery_life_sensor_->publish_state(batteryLifeMinutes); 
+  {
+    float adjustedBattlife = (direction == 0) ? NULL : batteryLifeMinutes;
+    battery_life_sensor_->publish_state(adjustedBattlife);
+  }
  if (relay_status_sensor_)
     this->relay_status_sensor_->publish_state(relayStatus); 
  if (direction_sensor_)
