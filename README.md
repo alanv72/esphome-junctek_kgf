@@ -7,6 +7,7 @@ Connects to the Junctek KGF series battery monitor via UART (RS-485 adapter need
 * Battery Percent
 * Current Amps
 * Temperature
+* Plus Much more!
 
 ## Requirements
 * ESPHome
@@ -17,6 +18,20 @@ Tested on ESP32 using a RS-485 uart into a Junctek KG110F, but should work on an
 ## Usage
 ### Connect hardware.
 The ESP32 needs to be connected via an RS-485 module to the RS-485 on the monitor using a 4cp4 connector.
+-----------------------------------
+alanv72 confirmed working with ESP8266 with rs485 that doesn't need flowcontrol ping like max485. Couldn't make work with esp32 or max485 ¯\_(ツ)_/¯
+
+expanded sensors based on https://github.com/tfyoung/esphome-junctek_kgf/discussions/14
+
+Thanks to https://github.com/Lukylic!
+
+Update c+ code for newest firmware that has different string for reading measurements and doesn't have power in Watt's. C+ code calcs Watts based on amp * volatage and reports with orginal sensor name.
+
+Sample:
+Address/ID	CRC	Volts *.01	Amps *.01	AH Remaining *.001	AH Cumulative *.001	Watthours remaing	System runtime	Temp	Special Function	Relay state	Current Direction	Battery runtime in mins	Batt Resistance *01 mOh
+5	105	5206	6054	295606	5353	1295308	14069	127	0	0	0	292	5499
+5	141	5206	6056	295303	5656	1295308	14087	127	0	0	0	292	5515
+5	140	5206	6055	295303	5656	1295308	14087	127	0	0	0	292	5515
 
 ## ESPHOME Config
 The applicable config for the device should look something like:
@@ -101,5 +116,4 @@ sensor:
 UPDATED!!  all sensors added.
 Address is assumed to be 1 if not provided. (this is configured on the monitor)
 invert_current: This inverts the reported current, it's recommended to include this option with either true or false (which ever makes the current make more sense for your setup). The default is currently false (and false will match previous behaviour), but may change to true in future updates.
-## Future work
-More sensors/statistics are possible, as is adjusting various configuration, but haven't currently been added. File an issue if there anything you want to see.
+
