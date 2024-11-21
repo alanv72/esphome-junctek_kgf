@@ -181,7 +181,12 @@ void JuncTekKGF::handle_status(const char* buffer)
     current_sensor_->publish_state(adjustedCurrent);
   }
   if (power_sensor_)
-    this->power_sensor_->publish_state(adjustedCurrent * voltage); 
+  {
+    float adjustedCurrent = direction == 0 ? amps : -amps;
+    if (invert_current_)
+      adjustedCurrent *= -1;
+    power_sensor_->publish_state(adjustedCurrent * voltage);
+  } 
   if (temperature_)
     this->temperature_->publish_state(temperature);
 
