@@ -178,7 +178,7 @@ void JuncTekKGF::handle_status(const char* buffer)
   {
     float adjustedCurrent = direction == 0 ? amps : -amps;
     if (invert_current_)
-      adjustedCurrent *= 1;
+      adjustedCurrent *= -1;
     current_sensor_->publish_state(adjustedCurrent);
   }
   if (temperature_)
