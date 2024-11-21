@@ -19,7 +19,7 @@ Tested on ESP32 using a RS-485 uart into a Junctek KG110F, but should work on an
 ### Connect hardware.
 The ESP32 needs to be connected via an RS-485 module to the RS-485 on the monitor using a 4cp4 connector.
 -----------------------------------
-alanv72 confirmed working with ESP8266 with rs485 that doesn't need flowcontrol ping like max485. Couldn't make work with esp32 or max485 ¯\_(ツ)_/¯
+alanv72 confirmed working with ESP8266 with rs485 that doesn't need flowcontrol ping like max485. Couldn't make work with esp32 or max485 ¯\_(ツ)_/¯ Working with a KG160F (600amp) with display connected.
 
 expanded sensors based on https://github.com/tfyoung/esphome-junctek_kgf/discussions/14
 
