@@ -27,6 +27,8 @@ Thanks to https://github.com/Lukylic!
 
 Update c+ code for newest firmware that has different string for reading measurements and doesn't have power in Watt's. C+ code calcs Watts based on amp * volatage and reports with orginal sensor name.
 
+2024/11/23 - Corrected Total AH calcs.
+
 Sample:
 Address/ID	CRC	Volts *.01	Amps *.01	AH Remaining *.001	AH Cumulative *.001	Watthours remaing	System runtime	Temp	Special Function	Relay state	Current Direction	Battery runtime in mins	Batt Resistance *01 mOh
 5	105	5206	6054	295606	5353	1295308	14069	127	0	0	0	292	5499
