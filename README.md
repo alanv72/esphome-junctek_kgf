@@ -35,6 +35,9 @@ Address/ID	CRC	Volts *.01	Amps *.01	AH Remaining *.001	AH Cumulative *.001	Watth
 5	141	5206	6056	295303	5656	1295308	14087	127	0	0	0	292	5515
 5	140	5206	6055	295303	5656	1295308	14087	127	0	0	0	292	5515
 
+Expanded sample with 10min rolling avg battery runtime:
+[expanded_sample.yaml](https://github.com/alanv72/esphome-junctek_kgf/blob/main/expanded_sample.yaml)
+
 ## ESPHOME Config
 The applicable config for the device should look something like:
 
