@@ -43,11 +43,10 @@ public:
   void set_current_ratio_set_sensor(sensor::Sensor *current_ratio_set_sensor) { current_ratio_set_sensor_ = current_ratio_set_sensor; }
   void set_xx_sensor(sensor::Sensor *xx_sensor) { xx_sensor_ = xx_sensor; }
 
-
   void dump_config() override;
   void loop() override;
 
-  float get_setup_priority() const;// override;
+  float get_setup_priority() const;
 
 protected:
   bool readline();
@@ -92,7 +91,6 @@ protected:
   sensor::Sensor* current_ratio_set_sensor_{nullptr};
   sensor::Sensor* xx_sensor_{nullptr};
 
-
   static constexpr int MAX_LINE_LEN = 120;
   std::array<char, MAX_LINE_LEN> line_buffer_;
   size_t line_pos_ = 0;
@@ -102,4 +100,3 @@ protected:
   optional<unsigned long> last_stats_;
   bool invert_current_;
 };
-
