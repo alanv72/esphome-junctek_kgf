@@ -49,6 +49,8 @@ public:
   
   void accumulate_ah_usage(float ah_used);
 
+  void dump_config() override;
+
   float get_setup_priority() const;
 
 protected:
