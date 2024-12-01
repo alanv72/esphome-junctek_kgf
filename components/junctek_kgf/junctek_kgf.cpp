@@ -1,5 +1,3 @@
-#pragma once
-
 #include "esphome/core/log.h"
 #include "esphome/core/optional.h"
 #include "junctek_kgf.h"
