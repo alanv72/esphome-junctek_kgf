@@ -304,7 +304,7 @@ void JuncTekKGF::loop()
     float avg_ah_used_daily = avg_daily_ah_used_sensor_->get_state();
     
     if (avg_ah_used_daily > 0) {
-      float estimated_runtime = current_ah / (avg_ah_used_daily / 24.0); // Convert daily usage to hourly
+     // float estimated_runtime = current_ah / (avg_ah_used_daily / 24.0); // Convert daily usage to hourly
      // estimated_runtime_sensor_->publish_state(estimated_runtime);
     }
   }
