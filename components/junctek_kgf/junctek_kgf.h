@@ -41,7 +41,8 @@ public:
   void set_reserved_set_sensor(sensor::Sensor *reserved_set_sensor) { reserved_set_sensor_ = reserved_set_sensor; }
   void set_relay_normally_open_sensor(sensor::Sensor *relay_normally_open_sensor) { relay_normally_open_sensor_ = relay_normally_open_sensor; }
   void set_current_ratio_set_sensor(sensor::Sensor *current_ratio_set_sensor) { current_ratio_set_sensor_ = current_ratio_set_sensor; }
-  void set_xx_sensor(sensor::Sensor *xx_sensor) { xx_sensor_ = xx_sensor; }
+  void set_avg_daily_ah_used_sensor(sensor::Sensor *avg_daily_ah_used_sensor) { avg_daily_ah_used_sensor_ = avg_daily_ah_used_sensor; }
+  void set_estimated_runtime_sensor(sensor::Sensor *estimated_runtime_sensor) { estimated_runtime_sensor_ = estimated_runtime_sensor; }
 
   void dump_config() override;
   void loop() override;
@@ -78,9 +79,7 @@ protected:
   sensor::Sensor* negative_overcurrent_set_sensor_{nullptr};
   sensor::Sensor* over_power_protection_set_sensor_{nullptr};
   sensor::Sensor* over_temperature_set_sensor_{nullptr};
-
   sensor::Sensor* protection_recovery_seconds_set_sensor_{nullptr};
-
   sensor::Sensor* delay_time_set_sensor_{nullptr};
   sensor::Sensor* battery_amphour_capacity_set_sensor_{nullptr};
   sensor::Sensor* voltage_calibration_set_sensor_{nullptr};
@@ -89,7 +88,8 @@ protected:
   sensor::Sensor* reserved_set_sensor_{nullptr};
   sensor::Sensor* relay_normally_open_sensor_{nullptr};
   sensor::Sensor* current_ratio_set_sensor_{nullptr};
-  sensor::Sensor* xx_sensor_{nullptr};
+  sensor::Sensor* avg_daily_ah_used_sensor_{nullptr};
+  sensor::Sensor* estimated_runtime_sensor_{nullptr};
 
   static constexpr int MAX_LINE_LEN = 120;
   std::array<char, MAX_LINE_LEN> line_buffer_;
