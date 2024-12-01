@@ -53,13 +53,13 @@ void JuncTekKGF::setup()
   avg_daily_ah_used_sensor_->set_name("Average Daily Ah Used");
   avg_daily_ah_used_sensor_->set_unit_of_measurement("Ah");
   avg_daily_ah_used_sensor_->set_accuracy_decimals(3);
-  this->register_sensor(avg_daily_ah_used_sensor_);
+  App.register_sensor(avg_daily_ah_used_sensor_);
 
   estimated_runtime_sensor_ = new sensor::Sensor();
   estimated_runtime_sensor_->set_name("Estimated Battery Runtime");
   estimated_runtime_sensor_->set_unit_of_measurement("h");
   estimated_runtime_sensor_->set_accuracy_decimals(1);
-  this->register_sensor(estimated_runtime_sensor_);
+  App.register_sensor(estimated_runtime_sensor_);
 }
 
 void JuncTekKGF::dump_config()
