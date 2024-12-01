@@ -56,11 +56,11 @@ void JuncTekKGF::setup()
   avg_daily_ah_used_sensor_->set_accuracy_decimals(3);
   App.register_sensor(avg_daily_ah_used_sensor_);
 
-//  estimated_runtime_sensor_ = new sensor::Sensor();
-//  estimated_runtime_sensor_->set_name("Estimated Battery Runtime");
-//  estimated_runtime_sensor_->set_unit_of_measurement("h");
-//  estimated_runtime_sensor_->set_accuracy_decimals(1);
-//  App.register_sensor(estimated_runtime_sensor_);
+  estimated_runtime_sensor_ = new sensor::Sensor();
+  estimated_runtime_sensor_->set_name("Estimated Battery Runtime");
+  estimated_runtime_sensor_->set_unit_of_measurement("h");
+  estimated_runtime_sensor_->set_accuracy_decimals(1);
+  App.register_sensor(estimated_runtime_sensor_);
 }
 
 void JuncTekKGF::dump_config()
@@ -304,8 +304,8 @@ void JuncTekKGF::loop()
     float avg_ah_used_daily = avg_daily_ah_used_sensor_->get_state();
     
     if (avg_ah_used_daily > 0) {
-     // float estimated_runtime = current_ah / (avg_ah_used_daily / 24.0); // Convert daily usage to hourly
-     // estimated_runtime_sensor_->publish_state(estimated_runtime);
+      float estimated_runtime = current_ah / (avg_ah_used_daily / 24.0); // Convert daily usage to hourly
+      estimated_runtime_sensor_->publish_state(estimated_runtime);
     }
   }
 }
