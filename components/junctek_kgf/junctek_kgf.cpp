@@ -46,6 +46,22 @@ JuncTekKGF::JuncTekKGF(unsigned address, bool invert_current)
 {
 }
 
+void JuncTekKGF::setup()
+{
+  // Setup for new sensors
+  avg_daily_ah_used_sensor_ = new sensor::Sensor();
+  avg_daily_ah_used_sensor_->set_name("Average Daily Ah Used");
+  avg_daily_ah_used_sensor_->set_unit_of_measurement("Ah");
+  avg_daily_ah_used_sensor_->set_accuracy_decimals(3);
+  this->register_sensor(avg_daily_ah_used_sensor_);
+
+  estimated_runtime_sensor_ = new sensor::Sensor();
+  estimated_runtime_sensor_->set_name("Estimated Battery Runtime");
+  estimated_runtime_sensor_->set_unit_of_measurement("h");
+  estimated_runtime_sensor_->set_accuracy_decimals(1);
+  this->register_sensor(estimated_runtime_sensor_);
+}
+
 void JuncTekKGF::dump_config()
 {
   ESP_LOGCONFIG(TAG, "junctek_kgf:");
@@ -267,6 +283,34 @@ void JuncTekKGF::loop()
   {
     handle_line();
   }
+
+  // Update average daily Ah used sensor
+  static float total_ah_used = 0.0;
+  static unsigned long last_update_time = millis();
+  unsigned long current_time = millis();
+  
+  if (current_time - last_update_time >= 24 * 60 * 60 * 1000) { // Daily update
+    if (total_ah_used > 0.0) {
+      avg_daily_ah_used_sensor_->publish_state(total_ah_used);
+    }
+    total_ah_used = 0.0; // Reset for the next day
+    last_update_time = current_time;
+  }
+
+  // Calculate and publish estimated runtime
+  if (ah_battery_level_sensor_ && avg_daily_ah_used_sensor_) {
+    float current_ah = ah_battery_level_sensor_->get_state();
+    float avg_ah_used_daily = avg_daily_ah_used_sensor_->get_state();
+    
+    if (avg_ah_used_daily > 0) {
+      float estimated_runtime = current_ah / (avg_ah_used_daily / 24.0); // Convert daily usage to hourly
+      estimated_runtime_sensor_->publish_state(estimated_runtime);
+    }
+  }
+}
+
+void JuncTekKGF::accumulate_ah_usage(float ah_used) {
+  total_ah_used += ah_used;
 }
 
 float JuncTekKGF::get_setup_priority() const
