@@ -140,24 +140,23 @@ void JuncTekKGF::handle_status(const char* buffer)
   const float amps = getval(cursor) / 100.0;
   const float ampHourRemaining = getval(cursor) / 1000.0;
   const float ampHourTotalUsed = getval(cursor) / 1000.00;
-  const float wattHourRemaining = voltage * ampHourRemaining;  // device reporting incorrectly. Calculate Wh using voltage and Ah
+  const float wattHourAccumulative = getval(cursor); // This is now the accumulative Wh
   const float runtimeSeconds = getval(cursor);
-  const float temperature = getval(cursor) - 100.0;
-//not reporting in latest firmeware - Calulating based on amps * voltage
-//  const float powerInWatts = getval(cursor);
+  const float temperature = getval(cursor) - 100.0; // Celsius
   const int functionPending = getval(cursor);
   const int relayStatus = getval(cursor);
   const int direction = getval(cursor);
   const int batteryLifeMinutes = getval(cursor);
   const float batteryInternalOhms = getval(cursor) / 100.0;
-  ESP_LOGV("JunkTekKGF", "Recv %f %f %f %f %f %f %f %d %d %d %f %f", voltage, amps, ampHourRemaining, ampHourTotalUsed, wattHourRemaining, runtimeSeconds, temperature, functionPending , relayStatus, direction, batteryLifeMinutes, batteryInternalOhms);
-
+  const float wattHourRemaining = voltage * ampHourRemaining;  // device reporting incorrectly. Calculate Wh using voltage and Ah
+  ESP_LOGV("JunkTekKGF", "Recv %f %f %f %f %f %f %f %d %d %d %f %f %f", voltage, amps, ampHourRemaining, ampHourTotalUsed, wattHourAccumulative, runtimeSeconds, temperature, functionPending , relayStatus, direction, batteryLifeMinutes, batteryInternalOhms, wattHourRemaining);
+ 
  if (ah_battery_level_sensor_)
     this->ah_battery_level_sensor_->publish_state(ampHourRemaining); 
  if (ah_total_used_sensor_)
     this->ah_total_used_sensor_->publish_state(ampHourTotalUsed); 
  if (wh_battery_level_sensor_)
-    this->wh_battery_level_sensor_->publish_state(wattHourRemaining); 
+    this->wh_battery_level_sensor_->publish_state(wattHourRemaining); // Publish remaining Wh
  if (running_time_sensor_)
     this->running_time_sensor_->publish_state(runtimeSeconds); 
  if (battery_internal_resistor_sensor_)
