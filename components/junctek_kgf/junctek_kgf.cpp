@@ -140,7 +140,7 @@ void JuncTekKGF::handle_status(const char* buffer)
   const float amps = getval(cursor) / 100.0;
   const float ampHourRemaining = getval(cursor) / 1000.0;
   const float ampHourTotalUsed = getval(cursor) / 1000.00;
-  const float wattHourRemaining = getval(cursor) / 100.0;
+  const float wattHourRemaining = voltage * ampHourRemaining;  // device reporting incorrectly. Calculate Wh using voltage and Ah
   const float runtimeSeconds = getval(cursor);
   const float temperature = getval(cursor) - 100.0;
 //not reporting in latest firmeware - Calulating based on amps * voltage
