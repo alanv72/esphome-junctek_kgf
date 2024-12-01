@@ -60,9 +60,12 @@ CONF_TEMPERATURE_CALIBRATION_SET = "temperature_calibration_set"
 CONF_RESERVED_SET = "reserved_set"
 CONF_RELAY_NORMALY_OPEN = "relay_normally_open"
 CONF_CURRENT_RATIO_SET = "current_ratio_set"
+CONF_AVG_DAILY_AH_USED = "avg_daily_ah_used"
+CONF_ESTIMATED_RUNTIME_SENSOR = "estimated_runtime_sensor"
 
 UNIT_AMPERE_HEURE = "AH"
 UNIT_WATT_HEURE = "WH"
+UNIT_HOUR = "h"
 
 DEPENDENCIES = ["uart"]
 
@@ -97,6 +100,8 @@ TYPES = [
     CONF_RESERVED_SET,
     CONF_RELAY_NORMALY_OPEN,
     CONF_CURRENT_RATIO_SET,
+    CONF_AVG_DAILY_AH_USED,
+    CONF_ESTIMATED_RUNTIME_SENSOR,
 ]
 
 CONF_INVERT_CURRENT = "invert_current"
@@ -140,7 +145,7 @@ CONFIG_SCHEMA = cv.All(
             ),
             cv.Optional(CONF_POWER): sensor.sensor_schema(
                 unit_of_measurement=UNIT_WATT,
-                icon=ICON_FLASH,  # Corrected icon for power
+                icon=ICON_FLASH,
                 accuracy_decimals=0,
                 device_class=DEVICE_CLASS_POWER,
                 state_class=STATE_CLASS_MEASUREMENT,
@@ -269,7 +274,7 @@ CONFIG_SCHEMA = cv.All(
             ),
             cv.Optional(CONF_RESERVED_SET): sensor.sensor_schema(
                 unit_of_measurement=UNIT_VOLT,
-                icon=ICON_EMPTY,  # Corrected icon for reserved set
+                icon=ICON_EMPTY,
                 device_class=DEVICE_CLASS_BATTERY,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
@@ -280,6 +285,18 @@ CONFIG_SCHEMA = cv.All(
             ),
             cv.Optional(CONF_CURRENT_RATIO_SET): sensor.sensor_schema(
                 unit_of_measurement=UNIT_AMPERE,
+                icon=ICON_BATTERY,
+                device_class=DEVICE_CLASS_BATTERY,
+                state_class=STATE_CLASS_MEASUREMENT,
+            ),
+            cv.Optional(CONF_AVG_DAILY_AH_USED): sensor.sensor_schema(
+                unit_of_measurement=UNIT_AMPERE_HEURE,
+                icon=ICON_BATTERY,
+                device_class=DEVICE_CLASS_BATTERY,
+                state_class=STATE_CLASS_MEASUREMENT,
+            ),
+            cv.Optional(CONF_ESTIMATED_RUNTIME_SENSOR): sensor.sensor_schema(
+                unit_of_measurement=UNIT_HOUR,
                 icon=ICON_BATTERY,
                 device_class=DEVICE_CLASS_BATTERY,
                 state_class=STATE_CLASS_MEASUREMENT,
