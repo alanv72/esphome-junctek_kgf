@@ -1,6 +1,7 @@
 #include "esphome/core/log.h"
 #include "esphome/core/optional.h"
 #include "junctek_kgf.h"
+#include "esphome/core/application.h"
 
 #include <string>
 #include <string.h>
