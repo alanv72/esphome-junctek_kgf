@@ -61,7 +61,7 @@ CONF_RESERVED_SET = "reserved_set"
 CONF_RELAY_NORMALY_OPEN = "relay_normally_open"
 CONF_CURRENT_RATIO_SET = "current_ratio_set"
 CONF_AVG_DAILY_AH_USED = "avg_daily_ah_used"
-CONF_ESTIMATED_RUNTIME_SENSOR = "estimated_runtime_sensor"
+CONF_ESTIMATED_RUNTIME = "estimated_runtime"
 
 UNIT_AMPERE_HEURE = "AH"
 UNIT_WATT_HEURE = "WH"
