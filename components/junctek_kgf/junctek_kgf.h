@@ -44,8 +44,10 @@ public:
   void set_avg_daily_ah_used_sensor(sensor::Sensor *avg_daily_ah_used_sensor) { avg_daily_ah_used_sensor_ = avg_daily_ah_used_sensor; }
   void set_estimated_runtime_sensor(sensor::Sensor *estimated_runtime_sensor) { estimated_runtime_sensor_ = estimated_runtime_sensor; }
 
-  void dump_config() override;
+  void setup() override;
   void loop() override;
+  
+  void accumulate_ah_usage(float ah_used);
 
   float get_setup_priority() const;
 
@@ -99,4 +101,7 @@ protected:
   optional<unsigned long> last_settings_;
   optional<unsigned long> last_stats_;
   bool invert_current_;
+  
+  float total_ah_used;
+  unsigned long last_update_time;
 };
