@@ -101,7 +101,7 @@ TYPES = [
     CONF_RELAY_NORMALY_OPEN,
     CONF_CURRENT_RATIO_SET,
     CONF_AVG_DAILY_AH_USED,
-    CONF_ESTIMATED_RUNTIME_SENSOR,
+    CONF_ESTIMATED_RUNTIME,
 ]
 
 CONF_INVERT_CURRENT = "invert_current"
@@ -295,7 +295,7 @@ CONFIG_SCHEMA = cv.All(
                 device_class=DEVICE_CLASS_BATTERY,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
-            cv.Optional(CONF_ESTIMATED_RUNTIME_SENSOR): sensor.sensor_schema(
+            cv.Optional(CONF_ESTIMATED_RUNTIME): sensor.sensor_schema(
                 unit_of_measurement=UNIT_HOUR,
                 icon=ICON_BATTERY,
                 device_class=DEVICE_CLASS_BATTERY,
